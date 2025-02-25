@@ -11,7 +11,7 @@ TaskBtn.addEventListener("click", ()=>{
     const dateTime = taskDate.value;
     if (task==="" || dateTime==="") return;
 
-    fetch("http://127.0.0.1:5000/tasks", {
+    fetch("https://to-do-list-production-4d37.up.railway.app/tasks", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body:JSON.stringify({task:task, dateTime:dateTime})
@@ -33,7 +33,7 @@ TaskBtn.addEventListener("keypress", function(event){
 })
 //Load tasks 
 function load_tasks(){
-    fetch("http://127.0.0.1:5000/tasks")
+    fetch("https://to-do-list-production-4d37.up.railway.app/tasks")
     .then(response=> response.json() )
     .then(tasks => {
         if (!Array.isArray(tasks)) tasks = [];
@@ -69,7 +69,7 @@ function load_tasks(){
 }
 
 function delete_task(task_id){
-fetch(`http://127.0.0.1:5000/tasks/${task_id}`,
+fetch(`https://to-do-list-production-4d37.up.railway.app/tasks/${task_id}`,
     {method: "DELETE"})
 .then(response => response.json())
 .then(data => {
@@ -123,7 +123,7 @@ container.appendChild(cancelButt);
 }
 
 function update_task(task_id, newtask, newDateTime){
-fetch(`http://127.0.0.1:5000/tasks/${task_id}`,{
+fetch(`https://to-do-list-production-4d37.up.railway.app/tasks/${task_id}`,{
 method: "PUT",
 headers:{"Content-Type":"application/json"},
 body: JSON.stringify({task: newtask, dateTime:newDateTime})
