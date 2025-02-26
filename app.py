@@ -6,11 +6,13 @@ app = Flask(__name__)
 Task_file="tasks.txt"
 
 def load_tasks():
-    if not os.path.exists(Task_file):
+    if not os.path.exists(Task_file) or os.stat(Task_file).st_size == 0:
         return []
-    with open(Task_file, "r") as file:
-        return json.load(file);
-        #return file.read().splitlines()
+    try:
+        with open(Task_file, "r") as file:
+            return json.load(file)
+    except json.JSONDecodeError:
+        return []
 
 def save_tasks(tasks):
     with open(Task_file, "w") as file:
